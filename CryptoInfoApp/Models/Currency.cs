@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoInfoApp.Models
 {
-    // Модель для криптовалюты (используется на главной странице и в поиске)
+    // Model for cryptocurrency (used on the main page and in search)
     public class Currency
     {
         public string Id { get; set; }

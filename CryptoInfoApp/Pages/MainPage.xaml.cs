@@ -15,14 +15,14 @@ namespace CryptoInfoApp.Pages
             var viewModel = DataContext as MainViewModel;
             if (viewModel.SelectedCurrency != null)
             {
-                // Навигация на страницу деталей выбранной криптовалюты
+                // Navigate to the details page of the selected cryptocurrency
                 NavigationService.Navigate(new CurrencyDetailsPage(viewModel.SelectedCurrency.Id));
             }
         }
 
         private void SearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Навигация на страницу поиска
+            // Navigate to the search page
             NavigationService.Navigate(new SearchPage());
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoInfoApp.Models
 {
-    // Модель для детальной информации о криптовалюте
+    // Model for detailed information about cryptocurrency
     public class CurrencyDetails
     {
         public string Id { get; set; }
