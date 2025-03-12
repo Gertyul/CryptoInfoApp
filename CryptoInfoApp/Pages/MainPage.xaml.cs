@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using CryptoInfoApp.ViewModels;
 
 namespace CryptoInfoApp.Pages
@@ -24,6 +25,18 @@ namespace CryptoInfoApp.Pages
         {
             // Navigate to the search page
             NavigationService.Navigate(new SearchPage());
+        }
+
+        private void ViewChart_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as ViewModels.MainViewModel;
+            if (viewModel.SelectedCurrency != null)
+                NavigationService.Navigate(new ChartPage(viewModel.SelectedCurrency.Id));
+        }
+
+        private void CurrencyConverter_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.CurrencyConverterPage());
         }
     }
 }

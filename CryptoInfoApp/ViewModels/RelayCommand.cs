@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using CryptoInfoApp.Models;
+using CryptoInfoApp.Services;
 
 namespace CryptoInfoApp.ViewModels
 {

@@ -1,0 +1,31 @@
+﻿<Page x:Class="CryptoInfoApp.Pages.CurrencyConverterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vm="clr-namespace:CryptoInfoApp.ViewModels"
+      Title="Currency Converter">
+    <Page.DataContext>
+        <vm:ConverterViewModel />
+    </Page.DataContext>
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Currency Converter" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="From:" Width="50" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding AllCurrencies}" SelectedItem="{Binding FromCurrency}" 
+                          DisplayMemberPath="Name" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="To:" Width="50" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding AllCurrencies}" SelectedItem="{Binding ToCurrency}" 
+                          DisplayMemberPath="Name" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Amount:" Width="50" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            </StackPanel>
+            <Button Content="Convert" Command="{Binding ConvertCommand}" Width="100" Margin="0,10,0,10"/>
+            <TextBlock Text="Result:" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Result}"/>
+        </StackPanel>
+    </Grid>
+</Page>

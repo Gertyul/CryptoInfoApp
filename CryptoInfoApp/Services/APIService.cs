@@ -7,6 +7,7 @@ using CryptoInfoApp.Models;
 
 namespace CryptoInfoApp.Services
 {
+
     public static class APIService
     {
         private static readonly HttpClient httpClient = new HttpClient();
@@ -74,6 +75,33 @@ namespace CryptoInfoApp.Services
                 return results;
             }
             return new List<Currency>();
+        }
+
+        // Fetch OHLC data for a given cryptocurrency.
+        public static async Task<List<OhlcData>> GetOhlcDataAsync(string id, string vsCurrency = "usd", int days = 7)
+        {
+            var url = $"https://api.coingecko.com/api/v3/coins/{id}/ohlc?vs_currency={vsCurrency}&days={days}";
+            var response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                // The API returns an array of arrays: [timestamp, open, high, low, close]
+                var data = JsonConvert.DeserializeObject<List<List<decimal>>>(json);
+                var result = new List<OhlcData>();
+                foreach (var item in data)
+                {
+                    result.Add(new OhlcData
+                    {
+                        Timestamp = (long)item[0],
+                        Open = item[1],
+                        High = item[2],
+                        Low = item[3],
+                        Close = item[4]
+                    });
+                }
+                return result;
+            }
+            return new List<OhlcData>();
         }
     }
 }
