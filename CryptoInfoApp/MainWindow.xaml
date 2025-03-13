@@ -5,7 +5,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Settings">
-                <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click"/>
+                <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click" />
                 <MenuItem Header="Change Language">
                     
                     <MenuItem Header="English" Click="ChangeLanguage_Click" Tag="en-US"/>

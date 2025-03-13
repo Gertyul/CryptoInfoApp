@@ -3,7 +3,7 @@
     <!-- Dark theme styles -->
     <Color x:Key="WindowBackgroundColor">#FF2D2D30</Color>
     <Color x:Key="TextColor">White</Color>
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}" />
-    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
 
 </ResourceDictionary>

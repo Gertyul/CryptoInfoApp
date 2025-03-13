@@ -19,6 +19,8 @@ namespace CryptoInfoApp
 
         private void ToggleTheme_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("ToggleTheme_Click called!");
+
             // Remove the current theme dictionary and add the other one.
             var dicts = Application.Current.Resources.MergedDictionaries;
             dicts.Clear();

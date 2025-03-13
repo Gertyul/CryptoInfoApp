@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using CryptoInfoApp.Models;
 using CryptoInfoApp.Services;
 
@@ -28,8 +30,19 @@ namespace CryptoInfoApp.ViewModels
 
         public async Task LoadTopCurrencies()
         {
-            var currencies = await APIService.GetTopCurrenciesAsync(10);
-            TopCurrencies = new ObservableCollection<Currency>(currencies);
+            try
+            {
+                var currencies = await APIService.GetTopCurrenciesAsync(10);
+                TopCurrencies = new ObservableCollection<Currency>(currencies);
+                if (TopCurrencies.Count == 0)
+                {
+                    MessageBox.Show($"Loaded {currencies.Count} currencies");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading currencies: " + ex.Message);
+            }
         }
     }
 }

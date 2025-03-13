@@ -3,7 +3,7 @@
     <!-- Light theme styles -->
     <Color x:Key="WindowBackgroundColor">White</Color>
     <Color x:Key="TextColor">Black</Color>
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}" />
-    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
 
 </ResourceDictionary>

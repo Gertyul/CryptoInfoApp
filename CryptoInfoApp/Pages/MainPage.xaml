@@ -7,7 +7,7 @@
         <vm:MainViewModel />
     </Page.DataContext>
     <Grid Margin="10">
-        <StackPanel>
+        <StackPanel Background="{DynamicResource TextBrush}">
             <TextBlock Text="Top cryptocurrencies" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
             <ListView ItemsSource="{Binding TopCurrencies}" SelectedItem="{Binding SelectedCurrency}" 
                       SelectionChanged="ListView_SelectionChanged">
