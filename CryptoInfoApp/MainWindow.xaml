@@ -4,13 +4,13 @@
         Title="Crypto Info App" Height="600" Width="800"
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextBrush}">
-    
-    <DockPanel>
+
+    <DockPanel RenderTransformOrigin="0.501,0.522">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Settings">
                 <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click" />
                 <MenuItem Header="Change Language">
-                    
+
                     <MenuItem Header="English" Click="ChangeLanguage_Click" Tag="en-US"/>
                     <MenuItem Header="Русский" Click="ChangeLanguage_Click" Tag="ru-RU"/>
                 </MenuItem>
@@ -18,7 +18,8 @@
         </Menu>
 
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        
     </DockPanel>
-    
+
 
 </Window>

@@ -95,6 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MarketChartData.cs" />
     <Compile Include="Models\OhlcData.cs" />
     <Compile Include="Pages\ChartPage.xaml.cs">
       <DependentUpon>ChartPage.xaml</DependentUpon>

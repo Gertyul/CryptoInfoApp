@@ -42,8 +42,8 @@ namespace CryptoInfoApp.ViewModels
 
         public async Task LoadChartData()
         {
-            // Fetch OHLC data for the last 7 days
-            var ohlcData = await APIService.GetOhlcDataAsync(CurrencyId, "usd", 7);
+            // Fetch OHLC data for the last 1 day
+            var ohlcData = await APIService.GetOhlcDataAsync(CurrencyId, "usd", 1);
             if (ohlcData.Count == 0)
                 return;
 

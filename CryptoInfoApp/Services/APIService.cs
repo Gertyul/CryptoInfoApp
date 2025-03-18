@@ -76,6 +76,18 @@ namespace CryptoInfoApp.Services
             }
             return new List<Currency>();
         }
+        public static async Task<MarketChartData> GetMarketChartDataAsync(string id, string vsCurrency, int days)
+        {
+            var url = $"https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency={vsCurrency}&days={days}";
+            var response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<MarketChartData>(json);
+                return data;
+            }
+            return null;
+        }
 
         // Fetch OHLC data for a given cryptocurrency.
         public static async Task<List<OhlcData>> GetOhlcDataAsync(string id, string vsCurrency = "usd", int days = 7)
@@ -104,4 +116,5 @@ namespace CryptoInfoApp.Services
             return new List<OhlcData>();
         }
     }
+
 }
