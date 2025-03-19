@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using CryptoInfoApp.Models;
+using System.Windows;
+using System;
 
 namespace CryptoInfoApp.Services
 {
@@ -13,17 +15,32 @@ namespace CryptoInfoApp.Services
         private static readonly HttpClient httpClient = new HttpClient();
 
         // Получение списка топ криптовалют (по рыночной капитализации)
-        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage = 10)
+        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage)
         {
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; CryptoInfoApp/1.0)");
+
             var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={perPage}&page=1&sparkline=false";
-            var response = await httpClient.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var json = await response.Content.ReadAsStringAsync();
-                var currencies = JsonConvert.DeserializeObject<List<Currency>>(json);
-                return currencies;
+                var response = await httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var currencies = JsonConvert.DeserializeObject<List<Currency>>(json);
+                    return currencies;
+                }
+                else
+                {
+                    MessageBox.Show($"Response error: {response.StatusCode}");
+                    return new List<Currency>();
+                }
             }
-            return new List<Currency>();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return new List<Currency>();
+            }
         }
 
         // Получение детальной информации о криптовалюте
@@ -90,7 +107,7 @@ namespace CryptoInfoApp.Services
         }
 
         // Fetch OHLC data for a given cryptocurrency.
-        public static async Task<List<OhlcData>> GetOhlcDataAsync(string id, string vsCurrency = "usd", int days = 7)
+        public static async Task<List<OhlcData>> GetOhlcDataAsync(string id, string vsCurrency = "usd", int days = 1)
         {
             var url = $"https://api.coingecko.com/api/v3/coins/{id}/ohlc?vs_currency={vsCurrency}&days={days}";
             var response = await httpClient.GetAsync(url);

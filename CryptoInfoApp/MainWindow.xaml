@@ -4,22 +4,33 @@
         Title="Crypto Info App" Height="600" Width="800"
         Background="{DynamicResource WindowBackgroundBrush}"
         Foreground="{DynamicResource TextBrush}">
-
-    <DockPanel RenderTransformOrigin="0.501,0.522">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Settings">
-                <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click" />
-                <MenuItem Header="Change Language">
-
-                    <MenuItem Header="English" Click="ChangeLanguage_Click" Tag="en-US"/>
-                    <MenuItem Header="Русский" Click="ChangeLanguage_Click" Tag="ru-RU"/>
+    <DockPanel>
+        <!-- Верхня панель у вигляді Grid -->
+        <Grid DockPanel.Dock="Top" Background="{DynamicResource WindowBackgroundBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!-- Ліва кнопка повернення на головну -->
+            <Button Content="Back to Main" 
+                    Click="BackButton_Click"
+                    Margin="5, 5"
+                    VerticalAlignment="Center"
+                    Grid.Column="0"/>
+            <!-- Центральний простір (залишається порожнім) -->
+            <!-- Праворуч меню налаштувань -->
+            <Menu Grid.Column="2" Margin="5">
+                <MenuItem Header="Settings ⚙">
+                    <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click"/>
+                    <MenuItem Header="Change Language">
+                        <MenuItem Header="English" Click="ChangeLanguage_Click" Tag="en-US"/>
+                        <MenuItem Header="Русский" Click="ChangeLanguage_Click" Tag="ru-RU"/>
+                    </MenuItem>
                 </MenuItem>
-            </MenuItem>
-        </Menu>
-
+            </Menu>
+        </Grid>
+        <!-- Основний вміст -->
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-        
     </DockPanel>
-
-
 </Window>

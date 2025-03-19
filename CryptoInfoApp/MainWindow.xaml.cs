@@ -50,7 +50,11 @@ namespace CryptoInfoApp
                 MessageBox.Show($"Language changed to {culture.DisplayName}. Restart the app to see all changes.");
             }
         }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Наприклад, навігація на головну сторінку
+            MainFrame.Navigate(new Pages.MainPage());
+        }
 
-        
     }
 }
