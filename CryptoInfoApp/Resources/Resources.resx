@@ -198,4 +198,7 @@
   <data name="UkrainianText" xml:space="preserve">
     <value>Українська</value>
   </data>
+  <data name="USDEquivalentLabel" xml:space="preserve">
+    <value>USD Equivalent:</value>
+  </data>
 </root>

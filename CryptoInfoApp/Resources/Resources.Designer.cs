@@ -295,6 +295,15 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на USD Equivalent:.
+        /// </summary>
+        internal static string USDEquivalentLabel {
+            get {
+                return ResourceManager.GetString("USDEquivalentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на View Chart.
         /// </summary>
         internal static string ViewChartText {
