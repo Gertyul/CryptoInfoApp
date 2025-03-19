@@ -3,38 +3,40 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:vm="clr-namespace:CryptoInfoApp.ViewModels"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-      Title="Деталі криптовалюти">
+      xmlns:loc="clr-namespace:CryptoInfoApp.Localization"
+      Title="{loc:Loc Key=CurrencyDetailsTitle}">
     <Page.DataContext>
         <vm:CurrencyDetailsViewModel />
     </Page.DataContext>
     <ScrollViewer Margin="10">
-        <StackPanel >
+        <StackPanel>
+            
             <TextBlock Text="{Binding CurrencyDetails.Name}" 
                        FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
             <Image Source="{Binding CurrencyDetails.Image}" 
                    Width="64" Height="64" Margin="0,0,0,10"/>
-            <TextBlock Text="Ціна:" FontWeight="Bold"/>
-            <TextBlock Text="{Binding CurrencyDetails.CurrentPrice, StringFormat=C}" 
+            
+            <TextBlock Text="{loc:Loc Key=PriceLabel}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding CurrencyDetails.CurrentPrice, Converter={StaticResource FixedCurrencyConverter}}" 
                        Margin="0,0,0,10"/>
-            <TextBlock Text="Обсяг торгів:" FontWeight="Bold"/>
+            
+            <TextBlock Text="{loc:Loc Key=TradingVolumeLabel}" FontWeight="Bold"/>
             <TextBlock Text="{Binding CurrencyDetails.TotalVolume}" 
                        Margin="0,0,0,10"/>
-            <TextBlock Text="Зміна за 24 години:" FontWeight="Bold"/>
             
+            <TextBlock Text="{loc:Loc Key=PriceChangeLabel}" FontWeight="Bold"/>
             <TextBlock Text="{Binding CurrencyDetails.PriceChangePercentage24h, StringFormat={}{0:F2}%}" 
                        Margin="0,0,0,10"/>
-
-            <!-- Секція з графіком -->
-            <TextBlock Text="Графік ціни за останні 24 години" 
+            
+            <TextBlock Text="{loc:Loc Key=PriceChartLabel}" 
                        FontSize="20" FontWeight="Bold" Margin="0,20,0,10"/>
             <lvc:CartesianChart Series="{Binding ChartSeries}" Height="300">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Labels="{Binding ChartLabels}" />
                 </lvc:CartesianChart.AxisX>
-                <!-- Можна додати AxisY за потребою -->
             </lvc:CartesianChart>
-
-            <Button Content="Відкрити на сайті" 
+            
+            <Button Content="{loc:Loc Key=OpenWebsiteButton}" 
                     Click="OpenInBrowser_Click" Margin="0,20,0,0"/>
         </StackPanel>
     </ScrollViewer>

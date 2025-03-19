@@ -120,16 +120,82 @@
   <data name="SearchButtonText" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="Main" xml:space="preserve">
+  <data name="MainPageTitle" xml:space="preserve">
     <value>Crypto Info App</value>
   </data>
-  <data name="TopCryptocurrencies " xml:space="preserve">
-    <value>TopCryptocurrencies </value>
+  <data name="TopCryptocurrencies" xml:space="preserve">
+    <value>Top cryptocurrencies </value>
+  </data>
+  <data name="SettingsText" xml:space="preserve">
+    <value>Settings ⚙</value>
+  </data>
+  <data name="CurrencyConverterTitle" xml:space="preserve">
+    <value>Currency Converter</value>
+  </data>
+  <data name="FromLabel" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="ToLabel" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="AmountLabel" xml:space="preserve">
+    <value>Amount:</value>
+  </data>
+  <data name="ConvertButtonText" xml:space="preserve">
+    <value>Convert</value>
+  </data>
+  <data name="ResultLabel" xml:space="preserve">
+    <value>Result:</value>
+  </data>
+  <data name="CurrencyDetailsTitle" xml:space="preserve">
+    <value>Currency Details</value>
+  </data>
+  <data name="PriceLabel" xml:space="preserve">
+    <value>Price:</value>
+  </data>
+  <data name="TradingVolumeLabel" xml:space="preserve">
+    <value>Trading Volume:</value>
+  </data>
+  <data name="PriceChangeLabel" xml:space="preserve">
+    <value>Change (24h):</value>
+  </data>
+  <data name="PriceChartLabel" xml:space="preserve">
+    <value>Price Chart (24h)</value>
+  </data>
+  <data name="OpenWebsiteButton" xml:space="preserve">
+    <value>Open Website</value>
   </data>
   <data name="CurrencyConverterText" xml:space="preserve">
     <value>Currency Converter</value>
   </data>
-  <data name="SettingsText" xml:space="preserve">
-    <value>Settings ⚙</value>
+  <data name="ViewChartText" xml:space="preserve">
+    <value>View Chart</value>
+  </data>
+  <data name="SearchPageTitle" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchForCrypto" xml:space="preserve">
+    <value>Search for cryptocurrency</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Crypto Info App</value>
+  </data>
+  <data name="BackToMain" xml:space="preserve">
+    <value>Back to Main</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="ToggleThemeText" xml:space="preserve">
+    <value>Toggle Theme</value>
+  </data>
+  <data name="ChangeLanguageText" xml:space="preserve">
+    <value>Change Language</value>
+  </data>
+  <data name="EnglishText" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="UkrainianText" xml:space="preserve">
+    <value>Українська</value>
   </data>
 </root>

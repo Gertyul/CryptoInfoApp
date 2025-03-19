@@ -1,5 +1,4 @@
-﻿// Файл: LocExtension.cs (також у папці Localization)
-using System;
+﻿using System;
 using System.Windows.Data;
 using System.Windows.Markup;
 

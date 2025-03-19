@@ -2,34 +2,31 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:vm="clr-namespace:CryptoInfoApp.ViewModels"
-      Title="Search">
+      xmlns:loc="clr-namespace:CryptoInfoApp.Localization"
+      Title="{loc:Loc Key=SearchPageTitle}">
     <Page.DataContext>
         <vm:SearchViewModel />
     </Page.DataContext>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <!-- Рядок для пошукових контролів -->
             <RowDefinition Height="Auto"/>
-            <!-- Рядок для ListView (залишок простору) -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Верхня частина: пошукові контролі -->
+        
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Search for cryptocurrency" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="{loc:Loc Key=SearchForCrypto}" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
             <TextBox Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Width="300" />
-            <Button Content="Search" Command="{Binding SearchCommand}" Width="100" Margin="0,10,0,10"/>
+            <Button Content="{loc:Loc Key=SearchButtonText}" Command="{Binding SearchCommand}" Width="100" Margin="0,10,0,10"/>
         </StackPanel>
-
-        <!-- Нижня частина: ListView, який буде прокручуватися -->
+        
         <ListView Grid.Row="1"
-                  ItemsSource="{Binding SearchResults}"
-                  SelectedItem="{Binding SelectedCurrency}"
-                  SelectionChanged="ListView_SelectionChanged"
-                  Background="{DynamicResource WindowBackgroundBrush}"
-                  Foreground="{DynamicResource TextBrush}"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Margin="0,5,0,0">
+              ItemsSource="{Binding SearchResults}"
+              SelectedItem="{Binding SelectedCurrency}"
+              SelectionChanged="ListView_SelectionChanged"
+              Background="{DynamicResource WindowBackgroundBrush}"
+              Foreground="{DynamicResource TextBrush}"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              Margin="0,5,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

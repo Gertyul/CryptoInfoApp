@@ -12,27 +12,23 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Верхня частина: заголовок та кнопки -->
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Top cryptocurrencies" 
-                       FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock Text="{loc:Loc Key=TopCryptocurrencies}"
+                 FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                <Button Content="View Chart" Click="ViewChart_Click" Margin="5"/>
-                <Button Content= "{loc:Loc Key=CurrencyConverterText}" Click="CurrencyConverter_Click" Margin="5"/>
+                <Button Content="{loc:Loc Key=ViewChartText}" Click="ViewChart_Click" Margin="5"/>
+                <Button Content="{loc:Loc Key=CurrencyConverterText}" Click="CurrencyConverter_Click" Margin="5"/>
             </StackPanel>
             <Button Content="{loc:Loc Key=SearchButtonText}" Margin="0,20,0,0" Click="SearchButton_Click"/>
         </StackPanel>
-
-        <!-- Нижня частина: ListView, який буде прокручуватися, якщо елементів більше -->
-        <ListView Grid.Row="1" 
-                  ItemsSource="{Binding TopCurrencies}" 
-                  SelectedItem="{Binding SelectedCurrency}" 
-                  SelectionChanged="ListView_SelectionChanged"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Margin="0,5,0,0"
-                  Background="{DynamicResource WindowBackgroundBrush}"
-                  Foreground="{DynamicResource TextBrush}">
+        <ListView Grid.Row="1"
+              ItemsSource="{Binding TopCurrencies}"
+              SelectedItem="{Binding SelectedCurrency}"
+              SelectionChanged="ListView_SelectionChanged"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              Margin="0,5,0,0"
+              Background="{DynamicResource WindowBackgroundBrush}"
+              Foreground="{DynamicResource TextBrush}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,5">

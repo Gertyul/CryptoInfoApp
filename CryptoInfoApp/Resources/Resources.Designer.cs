@@ -61,6 +61,42 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Amount:.
+        /// </summary>
+        internal static string AmountLabel {
+            get {
+                return ResourceManager.GetString("AmountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Back to Main.
+        /// </summary>
+        internal static string BackToMain {
+            get {
+                return ResourceManager.GetString("BackToMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Change Language.
+        /// </summary>
+        internal static string ChangeLanguageText {
+            get {
+                return ResourceManager.GetString("ChangeLanguageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Convert.
+        /// </summary>
+        internal static string ConvertButtonText {
+            get {
+                return ResourceManager.GetString("ConvertButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Currency Converter.
         /// </summary>
         internal static string CurrencyConverterText {
@@ -70,11 +106,110 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Currency Converter.
+        /// </summary>
+        internal static string CurrencyConverterTitle {
+            get {
+                return ResourceManager.GetString("CurrencyConverterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Currency Details.
+        /// </summary>
+        internal static string CurrencyDetailsTitle {
+            get {
+                return ResourceManager.GetString("CurrencyDetailsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на English.
+        /// </summary>
+        internal static string EnglishText {
+            get {
+                return ResourceManager.GetString("EnglishText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на From:.
+        /// </summary>
+        internal static string FromLabel {
+            get {
+                return ResourceManager.GetString("FromLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Crypto Info App.
         /// </summary>
-        internal static string Main {
+        internal static string MainPageTitle {
             get {
-                return ResourceManager.GetString("Main", resourceCulture);
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Crypto Info App.
+        /// </summary>
+        internal static string MainWindowTitle {
+            get {
+                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Open Website.
+        /// </summary>
+        internal static string OpenWebsiteButton {
+            get {
+                return ResourceManager.GetString("OpenWebsiteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Change (24h):.
+        /// </summary>
+        internal static string PriceChangeLabel {
+            get {
+                return ResourceManager.GetString("PriceChangeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Price Chart (24h).
+        /// </summary>
+        internal static string PriceChartLabel {
+            get {
+                return ResourceManager.GetString("PriceChartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Price:.
+        /// </summary>
+        internal static string PriceLabel {
+            get {
+                return ResourceManager.GetString("PriceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Reload.
+        /// </summary>
+        internal static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Result:.
+        /// </summary>
+        internal static string ResultLabel {
+            get {
+                return ResourceManager.GetString("ResultLabel", resourceCulture);
             }
         }
         
@@ -88,6 +223,24 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Search for cryptocurrency.
+        /// </summary>
+        internal static string SearchForCrypto {
+            get {
+                return ResourceManager.GetString("SearchForCrypto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Search.
+        /// </summary>
+        internal static string SearchPageTitle {
+            get {
+                return ResourceManager.GetString("SearchPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Settings ⚙.
         /// </summary>
         internal static string SettingsText {
@@ -97,11 +250,56 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на TopCryptocurrencies .
+        ///   Ищет локализованную строку, похожую на Toggle Theme.
         /// </summary>
-        internal static string TopCryptocurrencies_ {
+        internal static string ToggleThemeText {
             get {
-                return ResourceManager.GetString("TopCryptocurrencies ", resourceCulture);
+                return ResourceManager.GetString("ToggleThemeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на To:.
+        /// </summary>
+        internal static string ToLabel {
+            get {
+                return ResourceManager.GetString("ToLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Top cryptocurrencies .
+        /// </summary>
+        internal static string TopCryptocurrencies {
+            get {
+                return ResourceManager.GetString("TopCryptocurrencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Trading Volume:.
+        /// </summary>
+        internal static string TradingVolumeLabel {
+            get {
+                return ResourceManager.GetString("TradingVolumeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Українська.
+        /// </summary>
+        internal static string UkrainianText {
+            get {
+                return ResourceManager.GetString("UkrainianText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View Chart.
+        /// </summary>
+        internal static string ViewChartText {
+            get {
+                return ResourceManager.GetString("ViewChartText", resourceCulture);
             }
         }
     }

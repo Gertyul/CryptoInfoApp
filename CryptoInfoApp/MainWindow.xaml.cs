@@ -3,6 +3,7 @@ using CryptoInfoApp.Pages;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
@@ -44,9 +45,13 @@ namespace CryptoInfoApp
             {
                 CultureInfo culture = new CultureInfo(cultureCode);
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
                 this.Language = XmlLanguage.GetLanguage(culture.IetfLanguageTag);
 
-                // Оновлюємо всі локалізовані прив’язки – викликаємо метод Refresh
+                // Очищення кешу ресурсного менеджера, щоб змінені рядки підвантажилися заново
+                CryptoInfoApp.Resources.Resources.ResourceManager.ReleaseAllResources();
+
+                // Оновлюємо локалізовані прив'язки (якщо використовуємо наш LocalizationProvider)
                 LocalizationProvider.Instance.Refresh();
             }
         }

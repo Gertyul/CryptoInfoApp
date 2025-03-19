@@ -120,16 +120,82 @@
   <data name="SearchButtonText" xml:space="preserve">
     <value>Пошук</value>
   </data>
-  <data name="Main" xml:space="preserve">
+  <data name="MainPageTitle" xml:space="preserve">
     <value>Crypto Info App</value>
   </data>
-  <data name="TopCryptocurrencies " xml:space="preserve">
+  <data name="TopCryptocurrencies" xml:space="preserve">
     <value>Найпопулярніші криптовалюти</value>
+  </data>
+  <data name="SettingsText" xml:space="preserve">
+    <value>Налаштування ⚙</value>
+  </data>
+  <data name="CurrencyConverterTitle" xml:space="preserve">
+    <value>Конвертер валют</value>
+  </data>
+  <data name="FromLabel" xml:space="preserve">
+    <value>Від:</value>
+  </data>
+  <data name="ToLabel" xml:space="preserve">
+    <value>До:</value>
+  </data>
+  <data name="AmountLabel" xml:space="preserve">
+    <value>Сума:</value>
+  </data>
+  <data name="ConvertButtonText" xml:space="preserve">
+    <value>Конвертувати</value>
+  </data>
+  <data name="ResultLabel" xml:space="preserve">
+    <value>Результат:</value>
+  </data>
+  <data name="CurrencyDetailsTitle" xml:space="preserve">
+    <value>Деталі криптовалюти</value>
+  </data>
+  <data name="PriceLabel" xml:space="preserve">
+    <value>Ціна:</value>
+  </data>
+  <data name="TradingVolumeLabel" xml:space="preserve">
+    <value>Обсяг торгів:</value>
+  </data>
+  <data name="PriceChangeLabel" xml:space="preserve">
+    <value>Зміна за 24 години:</value>
+  </data>
+  <data name="PriceChartLabel" xml:space="preserve">
+    <value>Графік ціни за останні 24 години</value>
+  </data>
+  <data name="OpenWebsiteButton" xml:space="preserve">
+    <value>Відкрити на сайті</value>
   </data>
   <data name="CurrencyConverterText" xml:space="preserve">
     <value>Конвертер валют</value>
   </data>
-  <data name="SettingsText" xml:space="preserve">
-    <value>Налаштування ⚙</value>
+  <data name="ViewChartText" xml:space="preserve">
+    <value>Переглянути графік</value>
+  </data>
+  <data name="SearchPageTitle" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+  <data name="SearchForCrypto" xml:space="preserve">
+    <value>Пошук криптовалюти</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Crypto Info App</value>
+  </data>
+  <data name="BackToMain" xml:space="preserve">
+    <value>Повернутися на головну</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Перезавантажити</value>
+  </data>
+  <data name="ToggleThemeText" xml:space="preserve">
+    <value>Перемкнути тему</value>
+  </data>
+  <data name="ChangeLanguageText" xml:space="preserve">
+    <value>Змінити мову</value>
+  </data>
+  <data name="EnglishText" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="UkrainianText" xml:space="preserve">
+    <value>Українська</value>
   </data>
 </root>
