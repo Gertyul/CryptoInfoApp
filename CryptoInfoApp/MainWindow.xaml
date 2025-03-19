@@ -12,13 +12,19 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!-- Ліва кнопка повернення на головну -->
-            <Button Content="Back to Main" 
-                    Click="BackButton_Click"
-                    Margin="5, 5"
-                    VerticalAlignment="Center"
-                    Grid.Column="0"/>
+            
+            <!-- Лівий стовпець: StackPanel із двома кнопками -->
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                <Button Content="Back to Main" 
+                        Click="BackButton_Click"
+                        Margin="5"/>
+                <Button Content="Reload" 
+                        Click="ReloadButton_Click"
+                        Margin="5"/>
+            </StackPanel>
+            
             <!-- Центральний простір (залишається порожнім) -->
+            
             <!-- Праворуч меню налаштувань -->
             <Menu Grid.Column="2" Margin="5">
                 <MenuItem Header="Settings ⚙">

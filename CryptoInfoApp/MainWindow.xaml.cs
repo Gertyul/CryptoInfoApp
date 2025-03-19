@@ -1,5 +1,6 @@
 ﻿using CryptoInfoApp.Pages;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
@@ -54,6 +55,13 @@ namespace CryptoInfoApp
         {
             // Наприклад, навігація на головну сторінку
             MainFrame.Navigate(new Pages.MainPage());
+        }
+
+        private void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Перезапуск застосунку:
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
 
     }
