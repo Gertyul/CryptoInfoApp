@@ -31,7 +31,7 @@
                     <MenuItem Header="Toggle Theme" Click="ToggleTheme_Click"/>
                     <MenuItem Header="Change Language">
                         <MenuItem Header="English" Click="ChangeLanguage_Click" Tag="en-US"/>
-                        <MenuItem Header="Русский" Click="ChangeLanguage_Click" Tag="ru-RU"/>
+                        <MenuItem Header="Українська" Click="ChangeLanguage_Click" Tag="uk-UA"/>
                     </MenuItem>
                 </MenuItem>
             </Menu>

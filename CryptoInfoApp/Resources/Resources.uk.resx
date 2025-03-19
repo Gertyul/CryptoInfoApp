@@ -117,4 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="SearchButtonText" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Crypto Info App</value>
+  </data>
+  <data name="TopCryptocurrencies " xml:space="preserve">
+    <value>Найпопулярніші криптовалюти</value>
+  </data>
+  <data name="CurrencyConverterText" xml:space="preserve">
+    <value>Конвертер валют</value>
+  </data>
+  <data name="SettingsText" xml:space="preserve">
+    <value>Налаштування ⚙</value>
+  </data>
 </root>

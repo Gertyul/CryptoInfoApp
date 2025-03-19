@@ -1,4 +1,5 @@
-﻿using CryptoInfoApp.Pages;
+﻿using CryptoInfoApp.Localization;
+using CryptoInfoApp.Pages;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -16,6 +17,7 @@ namespace CryptoInfoApp
         {
             InitializeComponent();
             MainFrame.Navigate(new Pages.MainPage());
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
         }
 
         private void ToggleTheme_Click(object sender, RoutedEventArgs e)
@@ -35,22 +37,20 @@ namespace CryptoInfoApp
                 isDark = false;
             }
         }
-
         private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as System.Windows.Controls.MenuItem;
             if (menuItem?.Tag is string cultureCode)
             {
-                // Set the culture for the application.
                 CultureInfo culture = new CultureInfo(cultureCode);
-                // Change the language for the current thread
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
-                // Update the language for the application resources.
                 this.Language = XmlLanguage.GetLanguage(culture.IetfLanguageTag);
-                // Optionally force reload of windows or use a localization framework.
-                MessageBox.Show($"Language changed to {culture.DisplayName}. Restart the app to see all changes.");
+
+                // Оновлюємо всі локалізовані прив’язки – викликаємо метод Refresh
+                LocalizationProvider.Instance.Refresh();
             }
         }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Наприклад, навігація на головну сторінку

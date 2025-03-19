@@ -1,11 +1,14 @@
-﻿// Services/APIService.cs
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using CryptoInfoApp.Models;
 using System.Windows;
 using System;
+using Polly;
+using Polly.Retry;
+using System.Net;
+using System.Runtime.Caching; 
 
 namespace CryptoInfoApp.Services
 {
@@ -14,36 +17,62 @@ namespace CryptoInfoApp.Services
     {
         private static readonly HttpClient httpClient = new HttpClient();
 
-        // Получение списка топ криптовалют (по рыночной капитализации)
-        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage)
+        private static readonly MemoryCache Cache = MemoryCache.Default;
+
+        // Політика повторних спроб для 429 (Too Many Requests)
+        private static readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy = Policy
+            .HandleResult<HttpResponseMessage>(r => r.StatusCode == (HttpStatusCode)429)
+            .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                (result, timeSpan, retryCount, context) =>
+                {
+                    System.Diagnostics.Debug.WriteLine($"Request failed with 429. Waiting {timeSpan} before retry {retryCount}.");
+                });
+
+        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage = 10)
         {
+            string cacheKey = $"TopCurrencies_{perPage}";
+
+            // Якщо дані є в кеші, повертаємо їх
+            if (Cache.Contains(cacheKey))
+            {
+                return (List<Currency>)Cache.Get(cacheKey);
+            }
+
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; CryptoInfoApp/1.0)");
 
             var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={perPage}&page=1&sparkline=false";
             try
             {
-                var response = await httpClient.GetAsync(url);
+                // Виконуємо запит із застосуванням політики повторних спроб
+                var response = await retryPolicy.ExecuteAsync(() => httpClient.GetAsync(url));
 
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
                     var currencies = JsonConvert.DeserializeObject<List<Currency>>(json);
+
+                    // Додаємо отримані дані до кешу на 2 хвилини
+                    Cache.Add(cacheKey, currencies, new CacheItemPolicy
+                    {
+                        AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(120)
+                    });
+
                     return currencies;
                 }
                 else
                 {
-                    MessageBox.Show($"Response error: {response.StatusCode}");
+                    System.Diagnostics.Debug.WriteLine($"Response error: {response.StatusCode}");
                     return new List<Currency>();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error in API call: " + ex.Message);
                 return new List<Currency>();
             }
         }
 
-        // Получение детальной информации о криптовалюте
+        // Отримання детальної інформації про криптовалюту
         public static async Task<CurrencyDetails> GetCurrencyDetailsAsync(string id)
         {
             var url = $"https://api.coingecko.com/api/v3/coins/{id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false";
@@ -69,7 +98,7 @@ namespace CryptoInfoApp.Services
             return null;
         }
 
-        // Поиск криптовалют по запросу
+        // Пошук криптовалют за запитом
         public static async Task<List<Currency>> SearchCurrencyAsync(string query)
         {
             var url = $"https://api.coingecko.com/api/v3/search?query={query}";
