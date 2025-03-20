@@ -201,4 +201,7 @@
   <data name="USDEquivalentLabel" xml:space="preserve">
     <value>USD Equivalent:</value>
   </data>
+  <data name="CandlestickToggleLabel" xml:space="preserve">
+    <value>Candlestick Chart:</value>
+  </data>
 </root>

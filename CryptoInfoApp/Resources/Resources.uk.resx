@@ -201,4 +201,7 @@
   <data name="USDEquivalentLabel" xml:space="preserve">
     <value>Еквівалент у $:</value>
   </data>
+  <data name="CandlestickToggleLabel" xml:space="preserve">
+    <value>Свічковий графік:</value>
+  </data>
 </root>

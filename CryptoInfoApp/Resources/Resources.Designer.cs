@@ -79,6 +79,15 @@ namespace CryptoInfoApp.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Candlestick Chart:.
+        /// </summary>
+        internal static string CandlestickToggleLabel {
+            get {
+                return ResourceManager.GetString("CandlestickToggleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Change Language.
         /// </summary>
         internal static string ChangeLanguageText {
