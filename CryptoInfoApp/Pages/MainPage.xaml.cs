@@ -32,14 +32,11 @@ namespace CryptoInfoApp.Pages
             var viewModel = DataContext as ViewModels.MainViewModel;
             if (viewModel.SelectedCurrency != null)
                 NavigationService.Navigate(new ChartPage(viewModel.SelectedCurrency.Id));
-                //((MainWindow)Application.Current.MainWindow).MainFrame.Navigate(new ChartPage(viewModel.SelectedCurrency.Id));
             else
             {
-                // Например, выдать сообщение, если не выбрана валюта
                 MessageBox.Show("Please select a currency first.");
             }
         }
-
 
         private void CurrencyConverter_Click(object sender, RoutedEventArgs e)
         {

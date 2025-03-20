@@ -23,8 +23,6 @@ namespace CryptoInfoApp
 
         private void ToggleTheme_Click(object sender, RoutedEventArgs e)
         {
-
-            // Remove the current theme dictionary and add the other one.
             var dicts = Application.Current.Resources.MergedDictionaries;
             dicts.Clear();
             if (!isDark)
@@ -51,20 +49,18 @@ namespace CryptoInfoApp
                 // Очищення кешу ресурсного менеджера, щоб змінені рядки підвантажилися заново
                 CryptoInfoApp.Resources.Resources.ResourceManager.ReleaseAllResources();
 
-                // Оновлюємо локалізовані прив'язки (якщо використовуємо наш LocalizationProvider)
+                // Оновлюємо локалізовані прив'язки 
                 LocalizationProvider.Instance.Refresh();
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Наприклад, навігація на головну сторінку
             MainFrame.Navigate(new Pages.MainPage());
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            // Перезапуск застосунку:
             Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }

@@ -10,7 +10,7 @@ namespace CryptoInfoApp.Models
     {
         // Масив масивів: [timestamp, price]
         public List<List<decimal>> Prices { get; set; }
-        // Можна додати й інші властивості, як-от volumes чи market_caps, за потребою
+        
     }
 }
 

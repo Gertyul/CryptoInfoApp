@@ -31,14 +31,6 @@ namespace CryptoInfoApp.ViewModels
 
         public async Task LoadTopCurrencies()
         {
-            //var currencies = await APIService.GetTopCurrenciesAsync(10);
-
-            // Тимчасово: хардкод для перевірки
-            //var currencies = new List<Currency> {
-            //    new Currency { Id="bitcoin", Name="Bitcoin", Image="..." },
-            //    new Currency { Id="ethereum", Name="Ethereum", Image="..." }
-            //};
-
             var currencies = await APIService.GetTopCurrenciesAsync(20);
             TopCurrencies = new ObservableCollection<Currency>(currencies);
         }

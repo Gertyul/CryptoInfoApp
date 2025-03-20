@@ -14,14 +14,17 @@
                 <TextBlock Text="{loc:Loc Key=FromLabel}" Width="50" VerticalAlignment="Center"/>
                 <ComboBox ItemsSource="{Binding AllCurrencies}" SelectedItem="{Binding FromCurrency}" DisplayMemberPath="Name" Width="200"/>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="{loc:Loc Key=ToLabel}" Width="50" VerticalAlignment="Center"/>
                 <ComboBox ItemsSource="{Binding AllCurrencies}" SelectedItem="{Binding ToCurrency}" DisplayMemberPath="Name" Width="200"/>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="{loc:Loc Key=AmountLabel}" Width="50" VerticalAlignment="Center"/>
                 <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             </StackPanel>
+            
             <Button Content="{loc:Loc Key=ConvertButtonText}" Command="{Binding ConvertCommand}" Width="100" Margin="0,10,0,10"/>
             <TextBlock Text="{loc:Loc Key=ResultLabel}" FontWeight="Bold"/>
             <TextBlock Text="{Binding Result}"/>

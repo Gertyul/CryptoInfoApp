@@ -17,7 +17,7 @@ namespace CryptoInfoApp.Converters
             {
                 return doubleValue.ToString("C", new CultureInfo("en-US"));
             }
-            // Якщо не decimal/double, спробуємо привести до decimal
+
             if (value != null && decimal.TryParse(value.ToString(), out decimal parsed))
             {
                 return parsed.ToString("C", new CultureInfo("en-US"));
