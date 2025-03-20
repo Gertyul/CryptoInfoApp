@@ -40,6 +40,7 @@ namespace CryptoInfoApp.Pages
             }
         }
 
+
         private void CurrencyConverter_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Pages.CurrencyConverterPage());

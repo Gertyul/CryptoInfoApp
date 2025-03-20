@@ -186,9 +186,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Out-of-use\LocalizationManager.cs" />
     <Compile Include="Localization\LocalizationProvider.cs" />
-    <Compile Include="Localization\LocalizedString.cs" />
+    <Compile Include="Out-of-use\LocalizedString.cs" />
     <Compile Include="Localization\LocExtension.cs" />
     <Compile Include="Models\MarketChartData.cs" />
     <Compile Include="Models\OhlcData.cs" />
