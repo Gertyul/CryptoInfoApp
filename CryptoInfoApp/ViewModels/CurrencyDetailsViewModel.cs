@@ -64,7 +64,6 @@ namespace CryptoInfoApp.ViewModels
 
             if (IsCandlestickChart)
             {
-                // Завантаження даних OHLC для японських свічок
                 var ohlcData = await APIService.GetOhlcDataAsync(CurrencyDetails.Id, "usd", 1);
                 if (ohlcData == null || ohlcData.Count == 0)
                     return;
@@ -85,7 +84,6 @@ namespace CryptoInfoApp.ViewModels
             }
             else
             {
-                // Завантаження даних для лінійного графіка через market_chart endpoint
                 var marketData = await APIService.GetMarketChartDataAsync(CurrencyDetails.Id, "usd", 1);
                 if (marketData == null || marketData.Prices == null)
                     return;

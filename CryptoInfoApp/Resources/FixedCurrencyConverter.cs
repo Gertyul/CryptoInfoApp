@@ -6,7 +6,6 @@ namespace CryptoInfoApp.Converters
 {
     public class FixedCurrencyConverter : IValueConverter
     {
-        // Форматує число як валюту США незалежно від поточної культури.
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is decimal decimalValue)

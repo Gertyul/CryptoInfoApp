@@ -46,10 +46,8 @@ namespace CryptoInfoApp
                 Thread.CurrentThread.CurrentUICulture = culture;
                 this.Language = XmlLanguage.GetLanguage(culture.IetfLanguageTag);
 
-                // Очищення кешу ресурсного менеджера, щоб змінені рядки підвантажилися заново
                 CryptoInfoApp.Resources.Resources.ResourceManager.ReleaseAllResources();
 
-                // Оновлюємо локалізовані прив'язки 
                 LocalizationProvider.Instance.Refresh();
             }
         }

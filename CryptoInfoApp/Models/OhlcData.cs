@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CryptoInfoApp.Models
 {
-    // Model representing OHLC data for candlestick charts.
     public class OhlcData
     {
         public long Timestamp { get; set; }

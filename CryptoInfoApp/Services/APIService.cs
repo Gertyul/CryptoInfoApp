@@ -19,7 +19,6 @@ namespace CryptoInfoApp.Services
 
         private static readonly MemoryCache Cache = MemoryCache.Default;
 
-        // Політика повторних спроб для 429 (Too Many Requests)
         private static readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy = Policy
             .HandleResult<HttpResponseMessage>(r => r.StatusCode == (HttpStatusCode)429)
             .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
@@ -32,7 +31,6 @@ namespace CryptoInfoApp.Services
         {
             string cacheKey = $"TopCurrencies_{perPage}";
 
-            // Якщо дані є в кеші, повертаємо їх
             if (Cache.Contains(cacheKey))
             {
                 return (List<Currency>)Cache.Get(cacheKey);
@@ -43,7 +41,6 @@ namespace CryptoInfoApp.Services
             var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={perPage}&page=1&sparkline=false";
             try
             {
-                // Виконуємо запит із застосуванням політики повторних спроб
                 var response = await retryPolicy.ExecuteAsync(() => httpClient.GetAsync(url));
 
                 if (response.IsSuccessStatusCode)
@@ -51,7 +48,6 @@ namespace CryptoInfoApp.Services
                     var json = await response.Content.ReadAsStringAsync();
                     var currencies = JsonConvert.DeserializeObject<List<Currency>>(json);
 
-                    // Додаємо отримані дані до кешу на 2 хвилини
                     Cache.Add(cacheKey, currencies, new CacheItemPolicy
                     {
                         AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(120)
@@ -72,7 +68,6 @@ namespace CryptoInfoApp.Services
             }
         }
 
-        // Отримання детальної інформації про криптовалюту
         public static async Task<CurrencyDetails> GetCurrencyDetailsAsync(string id)
         {
             var url = $"https://api.coingecko.com/api/v3/coins/{id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false";
@@ -98,7 +93,6 @@ namespace CryptoInfoApp.Services
             return null;
         }
 
-        // Пошук криптовалют за запитом
         public static async Task<List<Currency>> SearchCurrencyAsync(string query)
         {
             var url = $"https://api.coingecko.com/api/v3/search?query={query}";
@@ -135,7 +129,6 @@ namespace CryptoInfoApp.Services
             return null;
         }
 
-        // Fetch OHLC data for a given cryptocurrency.
         public static async Task<List<OhlcData>> GetOhlcDataAsync(string id, string vsCurrency = "usd", int days = 1)
         {
             var url = $"https://api.coingecko.com/api/v3/coins/{id}/ohlc?vs_currency={vsCurrency}&days={days}";
@@ -143,7 +136,7 @@ namespace CryptoInfoApp.Services
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                // The API returns an array of arrays: [timestamp, open, high, low, close]
+                
                 var data = JsonConvert.DeserializeObject<List<List<decimal>>>(json);
                 var result = new List<OhlcData>();
                 foreach (var item in data)

@@ -20,7 +20,6 @@ namespace CryptoInfoApp.Localization
             if (string.IsNullOrEmpty(Key))
                 return string.Empty;
 
-            // Створюємо Binding до індексатора LocalizationProvider.Instance
             var binding = new Binding($"[{Key}]")
             {
                 Source = LocalizationProvider.Instance,

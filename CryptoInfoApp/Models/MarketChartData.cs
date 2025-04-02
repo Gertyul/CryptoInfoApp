@@ -8,7 +8,6 @@ namespace CryptoInfoApp.Models
 {
     public class MarketChartData
     {
-        // Масив масивів: [timestamp, price]
         public List<List<decimal>> Prices { get; set; }
         
     }

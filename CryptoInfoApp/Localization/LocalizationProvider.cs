@@ -10,8 +10,6 @@ namespace CryptoInfoApp.Localization
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // Індексатор: повертає локалізований рядок за ключем із ресурсного файлу,
-        // використовуючи поточну CultureInfo.CurrentUICulture.
         public string this[string key]
         {
             get
@@ -20,10 +18,8 @@ namespace CryptoInfoApp.Localization
             }
         }
 
-        // Викликаємо цей метод після зміни культури, щоб оновити прив’язки.
         public void Refresh()
         {
-            // Оновлюємо всі прив’язки, що використовують індексатор ("Item[]" – стандартна назва для індексатора)
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         }
     }
