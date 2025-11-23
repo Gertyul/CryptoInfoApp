@@ -21,7 +21,7 @@ namespace CryptoInfoApp.Services
 
         private static readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy = Policy
             .HandleResult<HttpResponseMessage>(r => r.StatusCode == (HttpStatusCode)429)
-            .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+            .WaitAndRetryAsync(10, retryAttempt => TimeSpan.FromSeconds(Math.Pow(10, retryAttempt)),
                 (result, timeSpan, retryCount, context) =>
                 {
                     System.Diagnostics.Debug.WriteLine($"Request failed with 429. Waiting {timeSpan} before retry {retryCount}.");

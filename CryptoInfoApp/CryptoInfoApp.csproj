@@ -186,15 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Out-of-use\LocalizationManager.cs" />
     <Compile Include="Localization\LocalizationProvider.cs" />
-    <Compile Include="Out-of-use\LocalizedString.cs" />
     <Compile Include="Localization\LocExtension.cs" />
     <Compile Include="Models\MarketChartData.cs" />
     <Compile Include="Models\OhlcData.cs" />
-    <Compile Include="Pages\ChartPage.xaml.cs">
-      <DependentUpon>ChartPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\CurrencyConverterPage.xaml.cs">
       <DependentUpon>CurrencyConverterPage.xaml</DependentUpon>
     </Compile>
@@ -212,7 +207,6 @@
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\ConverterViewModel.cs" />
     <Compile Include="ViewModels\CurrencyDetailsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -230,10 +224,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\ChartPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\CurrencyConverterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

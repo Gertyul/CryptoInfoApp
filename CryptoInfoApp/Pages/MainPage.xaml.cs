@@ -27,17 +27,6 @@ namespace CryptoInfoApp.Pages
             NavigationService.Navigate(new SearchPage());
         }
 
-        private void ViewChart_Click(object sender, RoutedEventArgs e)
-        {
-            var viewModel = DataContext as ViewModels.MainViewModel;
-            if (viewModel.SelectedCurrency != null)
-                NavigationService.Navigate(new ChartPage(viewModel.SelectedCurrency.Id));
-            else
-            {
-                MessageBox.Show("Please select a currency first.");
-            }
-        }
-
         private void CurrencyConverter_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Pages.CurrencyConverterPage());
