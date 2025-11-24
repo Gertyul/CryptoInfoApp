@@ -57,7 +57,7 @@ namespace CryptoInfoApp.ViewModels
 
         public async Task LoadCurrencies()
         {
-            var currencies = await APIService.GetTopCurrenciesAsync(50);
+            var currencies = await APIService.GetSimpleCurrenciesAsync(11);
             AllCurrencies = new ObservableCollection<Currency>(currencies);
             OnPropertyChanged(nameof(AllCurrencies));
         }

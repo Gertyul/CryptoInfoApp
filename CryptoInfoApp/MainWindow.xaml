@@ -19,7 +19,7 @@
             </StackPanel>
             
             <Menu Grid.Column="2" Margin="5">
-                <MenuItem Header="{loc:Loc Key=SettingsText}">
+                <MenuItem Padding="20,5" Header="{loc:Loc Key=SettingsText}">
                     <MenuItem Header="{loc:Loc Key=ToggleThemeText}" Click="ToggleTheme_Click"/>
                     <MenuItem Header="{loc:Loc Key=ChangeLanguageText}">
                         <MenuItem Header="{loc:Loc Key=EnglishText}" Click="ChangeLanguage_Click" Tag="en-US"/>

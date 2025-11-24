@@ -1,9 +1,20 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic; // Потрібно для List<>
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CryptoInfoApp.Models
 {
-    public class Currency
+    public class Currency : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Зробив PUBLIC, щоб MainViewModel міг викликати оновлення інтерфейсу
+        public void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         [JsonProperty("id")]
         public string Id { get; set; }
 
@@ -16,13 +27,67 @@ namespace CryptoInfoApp.Models
         [JsonProperty("image")]
         public string Image { get; set; }
 
+        [JsonProperty("market_cap_rank")]
+        public int Rank { get; set; }
+
+        // --- Ціни ---
+
+        private decimal _currentPrice;
         [JsonProperty("current_price")]
-        public decimal CurrentPrice { get; set; }
+        public decimal CurrentPrice
+        {
+            get => _currentPrice;
+            set { _currentPrice = value; OnPropertyChanged(); }
+        }
 
-        [JsonProperty("market_cap")]
-        public decimal MarketCap { get; set; }
+        // Ціна з CoinMarketCap (заповнюється вручну)
+        private decimal _cmcPrice;
+        public decimal CmcPrice
+        {
+            get => _cmcPrice;
+            set { _cmcPrice = value; OnPropertyChanged(); }
+        }
 
+        // --- Зміни у відсотках ---
+
+        private double _priceChangePercentage1h;
+        [JsonProperty("price_change_percentage_1h_in_currency")]
+        public double PriceChangePercentage1h
+        {
+            get => _priceChangePercentage1h;
+            set { _priceChangePercentage1h = value; OnPropertyChanged(); }
+        }
+
+        private decimal _priceChangePercentage24h;
         [JsonProperty("price_change_percentage_24h")]
-        public decimal PriceChangePercentage24h { get; set; }
+        public decimal PriceChangePercentage24h
+        {
+            get => _priceChangePercentage24h;
+            set { _priceChangePercentage24h = value; OnPropertyChanged(); }
+        }
+
+        private double _priceChangePercentage7d;
+        [JsonProperty("price_change_percentage_7d_in_currency")]
+        public double PriceChangePercentage7d
+        {
+            get => _priceChangePercentage7d;
+            set { _priceChangePercentage7d = value; OnPropertyChanged(); }
+        }
+
+        // --- Графіки (Sparkline) ---
+        // Ці поля були втрачені, повертаємо їх назад
+
+        [JsonProperty("sparkline_in_7d")]
+        public SparklineData SparklineRaw { get; set; }
+
+        // Це поле використовується для малювання графіка в XAML
+        public List<double> SparklineIn7D => SparklineRaw?.Price;
+    }
+
+    // Допоміжний клас для читання JSON від CoinGecko
+    public class SparklineData
+    {
+        [JsonProperty("price")]
+        public List<double> Price { get; set; }
     }
 }

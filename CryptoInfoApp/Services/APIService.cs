@@ -27,20 +27,27 @@ namespace CryptoInfoApp.Services
                     System.Diagnostics.Debug.WriteLine($"Request failed with 429. Waiting {timeSpan} before retry {retryCount}.");
                 });
 
-        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage = 10)
+        public static async Task<List<Currency>> GetTopCurrenciesAsync(int perPage = 10, bool forceRefresh = false)
         {
             string cacheKey = $"TopCurrencies_{perPage}";
 
-            if (Cache.Contains(cacheKey))
+            // Перевірка кешу (якщо не примусове оновлення)
+            if (!forceRefresh && Cache.Contains(cacheKey))
             {
                 return (List<Currency>)Cache.Get(cacheKey);
             }
 
+            httpClient.DefaultRequestHeaders.Clear();
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; CryptoInfoApp/1.0)");
 
-            var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={perPage}&page=1&sparkline=false";
+            // --- УВАГА: ОНОВЛЕНИЙ URL ---
+            // Додано: &price_change_percentage=1h,7d
+            // Залишено: &sparkline=true (для графіків)
+            var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={perPage}&page=1&sparkline=true&price_change_percentage=1h,7d";
+
             try
             {
+                // Використовуємо політику повторів (retryPolicy), яку ви додали раніше
                 var response = await retryPolicy.ExecuteAsync(() => httpClient.GetAsync(url));
 
                 if (response.IsSuccessStatusCode)
@@ -48,17 +55,16 @@ namespace CryptoInfoApp.Services
                     var json = await response.Content.ReadAsStringAsync();
                     var currencies = JsonConvert.DeserializeObject<List<Currency>>(json);
 
-                    Cache.Add(cacheKey, currencies, new CacheItemPolicy
-                    {
-                        AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(120)
-                    });
+                    // Оновлюємо кеш (живе 60 секунд, щоб не спамити)
+                    Cache.Set(cacheKey, currencies, DateTimeOffset.Now.AddSeconds(60));
 
                     return currencies;
                 }
                 else
                 {
                     System.Diagnostics.Debug.WriteLine($"Response error: {response.StatusCode}");
-                    return new List<Currency>();
+                    // Якщо помилка, пробуємо повернути старий кеш, якщо він є, або пустий список
+                    return Cache.Contains(cacheKey) ? (List<Currency>)Cache.Get(cacheKey) : new List<Currency>();
                 }
             }
             catch (Exception ex)
@@ -66,6 +72,27 @@ namespace CryptoInfoApp.Services
                 System.Diagnostics.Debug.WriteLine("Error in API call: " + ex.Message);
                 return new List<Currency>();
             }
+        }
+
+        public static async Task<List<Currency>> GetSimpleCurrenciesAsync(int limit = 11)
+        {
+            // sparkline=false - це ключовий момент! Дані будуть "легкими"
+            var url = $"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={limit}&page=1&sparkline=false";
+
+            try
+            {
+                var response = await retryPolicy.ExecuteAsync(() => httpClient.GetAsync(url));
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Currency>>(json);
+                }
+            }
+            catch
+            {
+                // ігноруємо помилки
+            }
+            return new List<Currency>();
         }
 
         public static async Task<CurrencyDetails> GetCurrencyDetailsAsync(string id)

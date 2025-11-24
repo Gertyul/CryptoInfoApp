@@ -3,40 +3,141 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:vm="clr-namespace:CryptoInfoApp.ViewModels"
       xmlns:loc="clr-namespace:CryptoInfoApp.Localization"
+      Unloaded="MainPage_Unloaded"
+      Loaded="MainPage_Loaded"
       Title="{loc:Loc Key=MainPageTitle}">
     <Page.DataContext>
         <vm:MainViewModel />
     </Page.DataContext>
-    <Grid Margin="10">
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{loc:Loc Key=TopCryptocurrencies}"
-                 FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                
-                <Button Content="{loc:Loc Key=CurrencyConverterText}" Click="CurrencyConverter_Click" Margin="5"/>
+
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="{loc:Loc Key=TopCryptocurrencies}" 
+                           FontSize="28" FontWeight="Bold" 
+                           Foreground="{DynamicResource TextBrush}"/>
+                <TextBlock Text="Live Prices &amp; Aggregation (Gecko + CMC)" 
+                           FontSize="12" Opacity="0.5" Margin="2,0,0,0"/>
             </StackPanel>
-            <Button Content="{loc:Loc Key=SearchButtonText}" Margin="0,20,0,0" Click="SearchButton_Click"/>
-        </StackPanel>
-        <ListView Grid.Row="1"
-              ItemsSource="{Binding TopCurrencies}"
-              SelectedItem="{Binding SelectedCurrency}"
-              SelectionChanged="ListView_SelectionChanged"
-              ScrollViewer.VerticalScrollBarVisibility="Auto"
-              Margin="0,5,0,0"
-              Background="{DynamicResource WindowBackgroundBrush}"
-              Foreground="{DynamicResource TextBrush}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
-                        <Image Source="{Binding Image}" Width="32" Height="32" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Name}" FontSize="16" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="{loc:Loc Key=CurrencyConverterText}" Click="CurrencyConverter_Click" Margin="5,0"/>
+                <Button Content="{loc:Loc Key=SearchButtonText}" Click="SearchButton_Click" Margin="5,0"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10,0,10,10" Opacity="0.5" TextElement.FontWeight="SemiBold">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="#" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="Coin" Margin="10,0,0,0"/>
+            <TextBlock Grid.Column="2" Text="7d Chart" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="3" Text="Gecko Price" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="4" Text="CMC Price" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="5" Text="1h" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="6" Text="24h" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="7" Text="7d" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Padding="0">
+            <ListView ItemsSource="{Binding TopCurrencies}"
+                      SelectedItem="{Binding SelectedCurrency}"
+                      SelectionChanged="ListView_SelectionChanged"
+                      BorderThickness="0"
+                      Background="Transparent"
+                      Foreground="{DynamicResource TextBrush}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0,10"/>
+                        <Setter Property="BorderBrush" Value="#10000000"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="2.5*"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="0.8*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Rank}" 
+                                       Opacity="0.5" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                                <Image Source="{Binding Image}" Width="28" Height="28" Margin="0,0,10,0"/>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock Text="{Binding Symbol}" Opacity="0.5" FontSize="11"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <Path Grid.Column="2" 
+                                  Data="{Binding SparklineIn7D, Converter={StaticResource SparklineToPathConverter}}"
+                                  Stroke="{Binding PriceChangePercentage7d, Converter={StaticResource PriceColorConverter}}"
+                                  StrokeThickness="1.5"
+                                  Stretch="Fill" Width="80" Height="25"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="3" 
+                                       Text="{Binding CurrentPrice, Converter={StaticResource FixedCurrencyConverter}}" 
+                                       FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="4" 
+                                       Text="{Binding CmcPrice, Converter={StaticResource FixedCurrencyConverter}}" 
+                                       FontSize="12"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center" Opacity="0.9"/>
+
+                            <TextBlock Grid.Column="5" 
+                                       Text="{Binding PriceChangePercentage1h, StringFormat={}{0:F1}%}" 
+                                       Foreground="{Binding PriceChangePercentage1h, Converter={StaticResource PriceColorConverter}}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="13"/>
+
+                            <TextBlock Grid.Column="6" 
+                                       Text="{Binding PriceChangePercentage24h, StringFormat={}{0:F1}%}" 
+                                       Foreground="{Binding PriceChangePercentage24h, Converter={StaticResource PriceColorConverter}}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="13"/>
+
+                            <TextBlock Grid.Column="7" 
+                                       Text="{Binding PriceChangePercentage7d, StringFormat={}{0:F1}%}" 
+                                       Foreground="{Binding PriceChangePercentage7d, Converter={StaticResource PriceColorConverter}}"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="13"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
     </Grid>
 </Page>

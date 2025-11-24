@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace CryptoInfoApp.Themes
 {
-    /// <summary>
-    /// Логика взаимодействия для DarkTheme.xaml
-    /// </summary>
+
     public partial class DarkTheme : ResourceDictionary
     {
         public DarkTheme()

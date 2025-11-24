@@ -31,5 +31,21 @@ namespace CryptoInfoApp.Pages
         {
             NavigationService.Navigate(new Pages.CurrencyConverterPage());
         }
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm)
+            {
+                vm.StartTimer();
+            }
+        }
+
+        private void MainPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm)
+            {
+                vm.StopTimer();
+            }
+        }
+
     }
 }

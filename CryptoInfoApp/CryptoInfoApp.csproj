@@ -194,12 +194,15 @@
       <DependentUpon>CurrencyConverterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\FixedCurrencyConverter.cs" />
+    <Compile Include="Resources\PriceColorConverter.cs" />
     <Compile Include="Resources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\SparklineToPathConverter.cs" />
     <Compile Include="Services\APIService.cs" />
+    <Compile Include="Services\CoinMarketCapService.cs" />
     <Compile Include="Themes\DarkTheme.xaml.cs">
       <DependentUpon>DarkTheme.xaml</DependentUpon>
     </Compile>

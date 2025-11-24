@@ -6,4 +6,13 @@
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}" />
     <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
 
+    <SolidColorBrush x:Key="ToggleBtnBorder" Color="#af4425"/>
+    <SolidColorBrush x:Key="ToggleBtnText" Color="#af4425"/>
+    <SolidColorBrush x:Key="ToggleBtnCheckedBg" Color="#af4425"/>
+    <SolidColorBrush x:Key="ToggleBtnCheckedText" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="ToggleBtnHover" Color="#334CC2FF"/>
+
+    <SolidColorBrush x:Key="ButtonBackground" Color="#af4425"/>
+    <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+    <SolidColorBrush x:Key="ButtonHover" Color="#662e1c"/>
 </ResourceDictionary>

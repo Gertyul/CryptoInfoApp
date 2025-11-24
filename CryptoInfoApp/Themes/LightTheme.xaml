@@ -1,9 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="WindowBackgroundColor">White</Color>
+    <Color x:Key="WindowBackgroundColor">#d0e1f9</Color>
     <Color x:Key="TextColor">Black</Color>
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}" />
     <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}" />
 
+    <SolidColorBrush x:Key="ToggleBtnBorder" Color="#423189"/>
+    <SolidColorBrush x:Key="ToggleBtnText" Color="#423189"/>
+    <SolidColorBrush x:Key="ToggleBtnCheckedBg" Color="#423189"/>
+    <SolidColorBrush x:Key="ToggleBtnCheckedText" Color="White"/>
+    <SolidColorBrush x:Key="ToggleBtnHover" Color="#10007ACC"/>
+
+    <SolidColorBrush x:Key="ButtonBackground" Color="#423189"/>
+    <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+    <SolidColorBrush x:Key="ButtonHover" Color="#36013f"/>
 </ResourceDictionary>
