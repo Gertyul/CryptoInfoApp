@@ -17,7 +17,6 @@ CryptoInfoApp is a feature-rich WPF application for tracking cryptocurrency mark
 - **Candlestick & Line Charts:** Switch between detailed Japanese Candlestick charts (Green/Red) and standard Line charts.
 - **Timeframe Selection:** Analyze price movements over different periods: **24 Hours, 7 Days, and 30 Days**.
 - **Real-time Updates:** The details page includes a dedicated timer to fetch the latest price updates every minute.
-- **External Links:** Quick access to the cryptocurrency's official website.
 
 ### 💱 Smart Currency Converter
 - **Optimized Performance:** Uses a separate "lightweight" API strategy to load 50-100 currencies instantly without hitting rate limits.
