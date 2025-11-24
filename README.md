@@ -1,48 +1,61 @@
 # CryptoInfoApp
 
-CryptoInfoApp is a WPF application that provides comprehensive information about cryptocurrencies. It integrates multiple APIs to display current market data, detailed information for selected currencies, interactive charts, and a currency converter—all with support for theming and localization.
+CryptoInfoApp is a feature-rich WPF application for tracking cryptocurrency market data. It implements **Data Aggregation**, combining real-time prices from multiple sources (CoinGecko & CoinMarketCap) to provide the most accurate market overview. The app features advanced charting, a smart currency converter, and a modern, adaptive UI with support for theming and localization.
 
-## Features
+## Key Features
 
-- **Multi-Page Navigation**  
-  Easily navigate between different pages:
-  - **Main Page:** Displays the top cryptocurrencies by market capitalization.
-  - **Currency Details Page:** Shows detailed information for a selected cryptocurrency, including its current price, trading volume, 24-hour price change, and an interactive price chart. You can switch between a line chart and Japanese candlestick charts.
-  - **Search Page:** Allows you to search for cryptocurrencies by name or symbol.
-  - **Currency Converter:** Convert amounts between different cryptocurrencies, with a display of the USD equivalent.
+### 🚀 Advanced Dashboard (Main Page)
+- **Data Aggregation:** Displays prices from two independent sources simultaneously:
+  - **CoinGecko:** Primary data source (White text).
+  - **CoinMarketCap:** Secondary validation source (Orange text).
+- **Comprehensive Metrics:** Shows Rank, current Price, and percentage changes for **1h, 24h, and 7d**.
+- **Sparklines:** Visualizes 7-day price trends using mini-charts directly in the list.
+- **Auto-Refresh:** Data updates automatically every 60 seconds without blocking the UI.
+- **Smart Loading:** Optimized for performance using `MemoryCache` and lightweight API queries.
 
-- **Interactive Charting**  
-  The app uses [LiveCharts](https://github.com/Live-Charts/Live-Charts) to render charts:
-  - A standard line chart for price trends over the last 24 hours.
-  - Japanese candlestick (OHLC) charts that can be toggled on or off.
+### 📈 Interactive & Detailed Charting
+- **Candlestick & Line Charts:** Switch between detailed Japanese Candlestick charts (Green/Red) and standard Line charts.
+- **Timeframe Selection:** Analyze price movements over different periods: **24 Hours, 7 Days, and 30 Days**.
+- **Real-time Updates:** The details page includes a dedicated timer to fetch the latest price updates every minute.
 
-- **API Integration**  
-  Data is fetched from open APIs (e.g., CoinGecko) using the standard `HttpClient`. The application employs retry policies (with Polly) and caching techniques to handle rate limits and reduce API calls.
+### 💱 Smart Currency Converter
+- **Optimized Performance:** Uses a separate "lightweight" API strategy to load 50-100 currencies instantly without hitting rate limits.
+- **Offline/Fallback Mode:** Includes a fail-safe mechanism to generate basic market data if the API is unreachable.
+- **Instant Calculation:** Converts amounts automatically as you type or change currencies.
+- **USD Equivalent:** Always displays the total value in USD for reference.
 
-- **Currency Converter**  
-  Provides conversion between cryptocurrencies. Prices are formatted to always display in USD using a custom converter, regardless of the interface language.
-
-- **Theming**  
-  Supports both light and dark themes that can be toggled at runtime, giving users the flexibility to choose their preferred UI style.
-
-- **Localization**  
-  Fully localized for English and Ukrainian. The app uses resource files (.resx) and a custom `LocExtension` to load texts dynamically based on the selected language. Users can change the interface language without restarting the application.
+### 🎨 Modern UI/UX
+- **Adaptive Design:** Fully responsive layout using Grids and DockPanels (no empty spaces).
+- **Custom Controls:**
+  - Styled Scrollbars (Thin, rounded, and adaptive to themes).
+  - Modern "Card" layout with drop shadows.
+  - Vector Icon buttons (Path-based geometry).
+- **Theming:** Runtime toggling between **Light** and **Dark** themes with dynamic resource updates.
+- **Localization:** Full support for **English** and **Ukrainian** languages, switchable on the fly.
 
 ## Technologies Used
 
-- **WPF (.NET Framework)** for building the user interface.
-- **HttpClient** for API calls.
-- **Newtonsoft.Json** for JSON deserialization.
-- **LiveCharts.Wpf** for interactive charting.
-- **Polly** (optional) for implementing retry policies.
-- **Resource Files (.resx)** for localization.
-- **MVVM Pattern** with custom implementations (e.g., RelayCommand) for separation of concerns.
+- **WPF (.NET Framework)** – UI Architecture.
+- **MVVM Pattern** – Clean separation of logic (Models, ViewModels, Views).
+- **HttpClient & Polly** – Resilient API communication with Retry policies for handling Rate Limits (429).
+- **Newtonsoft.Json** – JSON parsing.
+- **LiveCharts.Wpf** – Advanced charting (Candlesticks, Lines).
+- **System.Runtime.Caching** – In-memory caching to optimize API usage.
+- **Multi-API Integration** – CoinGecko (Public API) & CoinMarketCap (Pro API).
 
 ## Project Structure
 
-- **Pages:** Contains all the XAML pages (MainPage, CurrencyDetailsPage, SearchPage, CurrencyConverterPage).
-- **ViewModels:** Contains the MVVM view models that drive the application logic.
-- **Models:** Defines the data models (e.g., Currency, CurrencyDetails, OhlcData).
-- **Services:** Handles API integration and data retrieval.
-- **Localization:** Contains classes for dynamic localization (e.g., LocExtension, LocalizationProvider) and the resource files are located in the Properties folder.
-- **Converters:** Contains value converters like FixedCurrencyConverter for consistent currency formatting.
+- **Pages:** XAML views (MainPage, CurrencyDetailsPage, CurrencyConverterPage).
+- **ViewModels:** Logic for Aggregation, Timer management, and Data binding.
+- **Models:** Data structures including `SparklineData` and extended `Currency` properties (1h/7d changes).
+- **Services:** - `APIService`: Handles CoinGecko requests (Heavy & Light methods).
+  - `CoinMarketCapService`: Fetches alternative prices.
+- **Converters:** Value converters for UI logic (`SparklineToPath`, `PriceColor`, `FixedCurrency`).
+- **Themes:** Resource dictionaries for Light/Dark modes and control styles.
+
+## Getting Started
+
+1. Clone the repository.
+2. Ensure you have an active Internet connection (for API calls).
+3. Build and Run the solution in Visual Studio.
+4. *Note:* The CoinMarketCap API key is pre-configured in `CoinMarketCapService.cs`.
