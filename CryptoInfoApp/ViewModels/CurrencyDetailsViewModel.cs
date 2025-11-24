@@ -14,8 +14,8 @@ namespace CryptoInfoApp.ViewModels
     public class CurrencyDetailsViewModel : BaseViewModel
     {
         private int _chartDays = 1;
-        private readonly DispatcherTimer _timer; // Таймер
-        private string _currentId; // Щоб знати, яку валюту оновлювати
+        private readonly DispatcherTimer _timer;
+        private string _currentId;
 
         private CurrencyDetails _currencyDetails;
         public CurrencyDetails CurrencyDetails
@@ -66,7 +66,6 @@ namespace CryptoInfoApp.ViewModels
                 }
             });
 
-            // Налаштовуємо таймер на 60 секунд
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(60);
             _timer.Tick += async (s, e) => await RefreshPriceAsync();
@@ -76,16 +75,13 @@ namespace CryptoInfoApp.ViewModels
         {
             _currentId = id;
 
-            // Завантажуємо дані перший раз
             CurrencyDetails = await APIService.GetCurrencyDetailsAsync(id);
             _chartDays = 1;
             await UpdateChartSeriesAsync();
 
-            // Запускаємо таймер
             _timer.Start();
         }
 
-        // Метод для оновлення тільки тексту (ціни), не чіпаючи графік
         private async Task RefreshPriceAsync()
         {
             if (string.IsNullOrEmpty(_currentId)) return;
@@ -94,7 +90,6 @@ namespace CryptoInfoApp.ViewModels
 
             if (freshDetails != null)
             {
-                // Оновлюємо об'єкт, інтерфейс підхопить зміни автоматично
                 CurrencyDetails = freshDetails;
             }
         }
@@ -103,22 +98,19 @@ namespace CryptoInfoApp.ViewModels
         {
             if (CurrencyDetails == null) return;
 
-            // Очищаємо графік перед завантаженням, щоб користувач бачив процес
             ChartSeries = null;
 
             if (IsCandlestickChart)
             {
-                // Передаємо _chartDays у запит
                 var ohlcData = await APIService.GetOhlcDataAsync(CurrencyDetails.Id, "usd", _chartDays);
                 if (ohlcData == null || ohlcData.Count == 0) return;
 
                 var candleValues = new ChartValues<OhlcPoint>();
-                var labels = new List<string>(); // Використовуємо List для динамічності
+                var labels = new List<string>();
 
                 foreach (var item in ohlcData)
                 {
                     candleValues.Add(new OhlcPoint((double)item.Open, (double)item.High, (double)item.Low, (double)item.Close));
-                    // Форматуємо дату в залежності від періоду
                     var time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp);
                     labels.Add(_chartDays == 1 ? time.ToString("HH:mm") : time.ToString("dd/MM HH:mm"));
                 }
@@ -135,9 +127,8 @@ namespace CryptoInfoApp.ViewModels
                 ChartSeries = new SeriesCollection { candleSeries };
                 ChartLabels = labels.ToArray();
             }
-            else // Лінійний графік
+            else
             {
-                // Передаємо _chartDays у запит
                 var marketData = await APIService.GetMarketChartDataAsync(CurrencyDetails.Id, "usd", _chartDays);
                 if (marketData == null || marketData.Prices == null) return;
 
@@ -175,7 +166,6 @@ namespace CryptoInfoApp.ViewModels
             if (_timer != null && !_timer.IsEnabled)
             {
                 _timer.Start();
-                // Можна одразу оновити ціну, щоб користувач бачив, що це працює
                 Task.Run(async () => await RefreshPriceAsync());
             }
         }

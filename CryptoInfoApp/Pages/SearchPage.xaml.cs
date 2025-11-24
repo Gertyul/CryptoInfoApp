@@ -15,7 +15,6 @@ namespace CryptoInfoApp.Pages
             var viewModel = DataContext as SearchViewModel;
             if (viewModel.SelectedCurrency != null)
             {
-                // Navigate to the details page of the selected cryptocurrency
                 NavigationService.Navigate(new CurrencyDetailsPage(viewModel.SelectedCurrency.Id));
             }
         }

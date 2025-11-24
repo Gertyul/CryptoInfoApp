@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic; // Потрібно для List<>
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,7 +9,6 @@ namespace CryptoInfoApp.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // Зробив PUBLIC, щоб MainViewModel міг викликати оновлення інтерфейсу
         public void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -30,8 +29,6 @@ namespace CryptoInfoApp.Models
         [JsonProperty("market_cap_rank")]
         public int Rank { get; set; }
 
-        // --- Ціни ---
-
         private decimal _currentPrice;
         [JsonProperty("current_price")]
         public decimal CurrentPrice
@@ -40,15 +37,12 @@ namespace CryptoInfoApp.Models
             set { _currentPrice = value; OnPropertyChanged(); }
         }
 
-        // Ціна з CoinMarketCap (заповнюється вручну)
         private decimal _cmcPrice;
         public decimal CmcPrice
         {
             get => _cmcPrice;
             set { _cmcPrice = value; OnPropertyChanged(); }
         }
-
-        // --- Зміни у відсотках ---
 
         private double _priceChangePercentage1h;
         [JsonProperty("price_change_percentage_1h_in_currency")]
@@ -74,17 +68,13 @@ namespace CryptoInfoApp.Models
             set { _priceChangePercentage7d = value; OnPropertyChanged(); }
         }
 
-        // --- Графіки (Sparkline) ---
-        // Ці поля були втрачені, повертаємо їх назад
 
         [JsonProperty("sparkline_in_7d")]
         public SparklineData SparklineRaw { get; set; }
 
-        // Це поле використовується для малювання графіка в XAML
         public List<double> SparklineIn7D => SparklineRaw?.Price;
     }
 
-    // Допоміжний клас для читання JSON від CoinGecko
     public class SparklineData
     {
         [JsonProperty("price")]

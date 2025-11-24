@@ -8,20 +8,15 @@ namespace CryptoInfoApp.Services
 {
     public static class CoinMarketCapService
     {
-        // Ваш ключ API
         private const string API_KEY = "3a811b3900ad4e30baf6b25cfa0eec16";
         private static readonly HttpClient client = new HttpClient();
 
-        /// <summary>
-        /// Отримує ціни топ-валют з CoinMarketCap і повертає їх як Словник (Символ -> Ціна)
-        /// </summary>
         public static async Task<Dictionary<string, decimal>> GetPricesAsync(int limit = 10)
         {
             var prices = new Dictionary<string, decimal>();
 
             try
             {
-                // Формуємо запит
                 var url = $"https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit={limit}&convert=USD";
 
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -35,10 +30,9 @@ namespace CryptoInfoApp.Services
                     var json = await response.Content.ReadAsStringAsync();
                     var data = JObject.Parse(json);
 
-                    // Розбираємо складну структуру JSON від CMC
                     foreach (var token in data["data"])
                     {
-                        string symbol = token["symbol"].ToString().ToUpper(); // Наприклад: BTC
+                        string symbol = token["symbol"].ToString().ToUpper();
                         decimal price = token["quote"]["USD"]["price"].Value<decimal>();
 
                         if (!prices.ContainsKey(symbol))

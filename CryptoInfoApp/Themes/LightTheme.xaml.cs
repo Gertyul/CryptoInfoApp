@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace CryptoInfoApp.Themes
 {
-    /// <summary>
-    /// Логіка взаємодії для LightTheme.xaml
-    /// </summary>
     public partial class LightTheme : ResourceDictionary
     {
         public LightTheme()

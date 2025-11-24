@@ -8,14 +8,12 @@ namespace CryptoInfoApp.ViewModels
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
 
-        // Конструктор для команд з параметрами
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        // Конструктор для простих команд (без параметрів) - щоб не зламати старий код
         public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
             _execute = p => execute();
