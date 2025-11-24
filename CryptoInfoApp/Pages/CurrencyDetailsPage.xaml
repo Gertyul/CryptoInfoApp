@@ -87,7 +87,5 @@
             </Grid>
         </Border>
 
-        <Button Grid.Row="2" Content="{loc:Loc Key=OpenWebsiteButton}" Click="OpenInBrowser_Click" 
-                HorizontalAlignment="Right" Margin="0,10,5,0" Width="150"/>
     </Grid>
 </Page>

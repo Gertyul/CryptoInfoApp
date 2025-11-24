@@ -30,14 +30,6 @@ namespace CryptoInfoApp.Pages
             }
         }
 
-        private void OpenInBrowser_Click(object sender, RoutedEventArgs e)
-        {
-            var viewModel = DataContext as CurrencyDetailsViewModel;
-            if (!string.IsNullOrEmpty(viewModel.CurrencyDetails?.Homepage))
-            {
-                Process.Start(new ProcessStartInfo(viewModel.CurrencyDetails.Homepage) { UseShellExecute = true });
-            }
-        }
     }
 }
 
